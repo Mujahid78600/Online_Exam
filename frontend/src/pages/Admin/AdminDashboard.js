@@ -29,13 +29,13 @@ const AdminDashboard = ({ user, onUserUpdate }) => {
   const fetchData = async () => {
     try {
       const eRes = await axios.get(
-        'http://localhost:5000/api/exams/list',
+        'https://online-exam-evgn.vercel.app/api/exams/list',
         getHeaders()
       );
       setExams(eRes.data);
 
       const sRes = await axios.get(
-        'http://localhost:5000/api/extra/results/submitted',
+        'https://online-exam-evgn.vercel.app/api/extra/results/submitted',
         getHeaders()
       );
       setSubmittedExams(sRes.data);
@@ -49,7 +49,7 @@ const AdminDashboard = ({ user, onUserUpdate }) => {
   const fetchStudents = async () => {
     try {
       const res = await axios.get(
-        'http://localhost:5000/api/extra/students/active',
+        'https://online-exam-evgn.vercel.app/api/extra/students/active',
         getHeaders()
       );
       setStudentsList(res.data);
