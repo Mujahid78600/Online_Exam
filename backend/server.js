@@ -2,11 +2,9 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
-const bcrypt = require('bcryptjs');
 const path = require('path');
 
 const connectDB = require('./config/db');
-const User = require('./models/User');
 
 dotenv.config();
 
@@ -21,18 +19,45 @@ app.use(
   express.static(path.join(__dirname, 'uploads'))
 );
 
-// MongoDB connection status
-app.get('/api/health', async (req, res) => {
-  const mongoose = require('mongoose');
-
+// Backend status
+app.get('/', (req, res) => {
   res.json({
-    backend: 'Running',
-    database:
-      mongoose.connection.readyState === 1
-        ? 'Connected'
-        : 'Disconnected',
-    databaseName: mongoose.connection.name || null
+    backend: 'Online Exam Backend Running'
   });
+});
+
+// MongoDB health check
+app.get('/api/health', async (req, res) => {
+  try {
+    await connectDB();
+
+    const mongoose = require('mongoose');
+
+    res.status(200).json({
+      backend: 'Running',
+      database: 'Connected',
+      databaseName: mongoose.connection.name
+    });
+  } catch (error) {
+    res.status(503).json({
+      backend: 'Running',
+      database: 'Disconnected',
+      error: error.message
+    });
+  }
+});
+
+// Connect database before processing API requests
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (error) {
+    res.status(503).json({
+      success: false,
+      message: 'Database connection failed'
+    });
+  }
 });
 
 // API Routes
@@ -41,36 +66,6 @@ app.use('/api/questions', require('./routes/questionRoutes'));
 app.use('/api/exams', require('./routes/examRoutes'));
 app.use('/api/admin', require('./routes/adminRoutes'));
 app.use('/api/extra', require('./routes/extraRoutes'));
-
-// Default Admin Seeding
-const seedAdmin = async () => {
-  try {
-    await connectDB();
-
-    const adminExists = await User.findOne({
-      role: 'admin'
-    });
-
-    if (!adminExists) {
-      const hashedPassword = await bcrypt.hash(
-        'admin123',
-        10
-      );
-
-      await User.create({
-        name: 'System Admin',
-        email: 'admin@exam.com',
-        password: hashedPassword,
-        role: 'admin',
-        status: 'active'
-      });
-
-      console.log('Default Admin Account Created');
-    }
-  } catch (err) {
-    console.error('Admin seed error:', err.message);
-  }
-};
 
 // Vercel serverless export
 module.exports = app;
