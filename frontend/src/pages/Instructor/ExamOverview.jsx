@@ -24,7 +24,7 @@ const ExamOverview = ({ submittedExams = [], onRefresh }) => {
       }));
 
       await axios.post(
-        'http://localhost:5000/api/exams/evaluate',
+        'https://online-exam-evgn.vercel.app/api/exams/evaluate',
         { examAttemptId: evaluationModalAttempt._id, evaluatedAnswers },
         getHeaders()
       );
