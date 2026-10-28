@@ -32,7 +32,7 @@ const LoginRegister = ({ onLoginSuccess }) => {
     const endpoint = isLogin ? '/api/auth/login' : '/api/auth/register';
 
     try {
-      const res = await axios.post(`http://localhost:5000${endpoint}`, formData);
+      const res = await axios.post(`https://online-exam-evgn.vercel.app${endpoint}`, formData);
 
       if (isLogin) {
         localStorage.setItem('token', res.data.token);
