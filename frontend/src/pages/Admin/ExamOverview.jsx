@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
 import { filterTableById } from '../../utils/tableSearch';
 
-const API_BASE = 'http://localhost:5000';
+const API_BASE = 'https://online-exam-evgn.vercel.app';
 
 const ExamOverview = () => {
   const [exams, setExams] = useState([]);
