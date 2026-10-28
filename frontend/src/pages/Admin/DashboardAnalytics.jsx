@@ -13,7 +13,7 @@ import {
   Cell
 } from 'recharts';
 
-const API_BASE = 'http://localhost:5000';
+const API_BASE = 'https://online-exam-evgn.vercel.app';
 const PAGE_SIZE = 7;
 const PASS_COLOR = '#16a34a';
 const FAIL_COLOR = '#ef4444';
