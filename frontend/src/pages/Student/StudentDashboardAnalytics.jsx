@@ -11,7 +11,7 @@ import {
   Legend
 } from 'recharts';
 
-const API_BASE = 'http://localhost:5000';
+const API_BASE = 'https://online-exam-evgn.vercel.app';
 
 const StudentDashboardAnalytics = ({ assignedExams = [], studentUser = {}, user }) => {
   const [results, setResults] = useState([]);
