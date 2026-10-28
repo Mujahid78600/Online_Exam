@@ -79,14 +79,14 @@ const QuestionBank = ({ questions = [], onRefresh }) => {
     try {
       if (editingQuestionId) {
         await axios.put(
-          `http://localhost:5000/api/questions/${editingQuestionId}`,
+          `https://online-exam-evgn.vercel.app/api/questions/${editingQuestionId}`,
           payload,
           getHeaders()
         );
         alert('Question Updated Successfully!');
       } else {
         await axios.post(
-          'http://localhost:5000/api/questions',
+          'https://online-exam-evgn.vercel.app/api/questions',
           payload,
           getHeaders()
         );
@@ -106,7 +106,7 @@ const QuestionBank = ({ questions = [], onRefresh }) => {
     if (!window.confirm('Are you sure you want to delete this question?')) return;
 
     try {
-      await axios.delete(`http://localhost:5000/api/questions/${id}`, getHeaders());
+      await axios.delete(`https://online-exam-evgn.vercel.app/api/questions/${id}`, getHeaders());
       if (typeof onRefresh === 'function') await onRefresh();
     } catch (err) {
       console.error('Error deleting question:', err.response?.data || err);
