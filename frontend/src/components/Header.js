@@ -52,7 +52,7 @@ const Header = ({ user, onLogout }) => {
   const imageUrl = formattedImagePath
     ? formattedImagePath.startsWith('http')
       ? formattedImagePath
-      : `http://localhost:5000/${formattedImagePath}`
+      : `https://online-exam-evgn.vercel.app/${formattedImagePath}`
     : null;
 
   return (
