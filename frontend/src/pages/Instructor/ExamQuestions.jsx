@@ -24,7 +24,7 @@ const ExamQuestions = ({ exams = [], questions = [], onRefresh }) => {
 
     try {
       const res = await axios.get(
-        `http://localhost:5000/api/exams/mapped-questions/${exam._id}`,
+        `https://online-exam-evgn.vercel.app/api/exams/mapped-questions/${exam._id}`,
         getHeaders()
       );
       setSelectedQuestionsForExam(res.data);
@@ -44,7 +44,7 @@ const ExamQuestions = ({ exams = [], questions = [], onRefresh }) => {
 
     try {
       const res = await axios.get(
-        `http://localhost:5000/api/exams/mapped-questions/${examId}`,
+        `https://online-exam-evgn.vercel.app/api/exams/mapped-questions/${examId}`,
         getHeaders()
       );
       setSelectedQuestionsForExam(res.data);
@@ -104,7 +104,7 @@ const ExamQuestions = ({ exams = [], questions = [], onRefresh }) => {
 
     try {
       await axios.post(
-        'http://localhost:5000/api/exams/add-questions',
+        'https://online-exam-evgn.vercel.app/api/exams/add-questions',
         {
           exam_schedule_id: selectedExamForMap,
           question_ids: selectedQuestionsForExam
@@ -113,7 +113,7 @@ const ExamQuestions = ({ exams = [], questions = [], onRefresh }) => {
       );
 
       await axios.put(
-        `http://localhost:5000/api/exams/schedule/${selectedExamForMap}`,
+        `https://online-exam-evgn.vercel.app/api/exams/schedule/${selectedExamForMap}`,
         {
           exam_name: currentExam.exam_name,
           start_time: currentExam.start_time,
@@ -142,7 +142,7 @@ const ExamQuestions = ({ exams = [], questions = [], onRefresh }) => {
     if (!window.confirm('Are you sure you want to delete this exam schedule?')) return;
 
     try {
-      await axios.delete(`http://localhost:5000/api/exams/schedule/${id}`, getHeaders());
+      await axios.delete(`https://online-exam-evgn.vercel.app/api/exams/schedule/${id}`, getHeaders());
       if (typeof onRefresh === 'function') {
         onRefresh();
       }
