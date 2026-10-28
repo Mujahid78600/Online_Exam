@@ -127,10 +127,10 @@ const ExamSchedule = ({ exams = [], studentsList = [], fetchStudents, onRefresh 
 
     try {
       if (editingExamId) {
-        await axios.put(`http://localhost:5000/api/exams/schedule/${editingExamId}`, payload, getHeaders());
+        await axios.put(`https://online-exam-evgn.vercel.app/api/exams/schedule/${editingExamId}`, payload, getHeaders());
         alert('Exam Schedule Updated Successfully!');
       } else {
-        await axios.post('http://localhost:5000/api/exams/schedule', payload, getHeaders());
+        await axios.post('https://online-exam-evgn.vercel.app/api/exams/schedule', payload, getHeaders());
         alert('Exam Scheduled and Assigned Successfully!');
       }
       setShowScheduleModal(false);
@@ -161,7 +161,7 @@ const ExamSchedule = ({ exams = [], studentsList = [], fetchStudents, onRefresh 
 
       try {
 
-        await axios.delete(`http://localhost:5000/api/exams/schedule/${id}`, getHeaders());
+        await axios.delete(`https://online-exam-evgn.vercel.app/api/exams/schedule/${id}`, getHeaders());
 
         onRefresh();
 
