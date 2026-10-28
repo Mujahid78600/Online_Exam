@@ -19,7 +19,7 @@ const InstructorProfile = ({ user, onUserUpdate }) => {
 
   const fetchFullProfile = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/extra/profile', {
+      const res = await axios.get('https://online-exam-evgn.vercel.app/api/extra/profile', {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       });
       const u = res.data.user || {};
@@ -41,7 +41,7 @@ const InstructorProfile = ({ user, onUserUpdate }) => {
 
       if (userImg) {
         const formattedPath = encodeURI(userImg.replace(/\\\\/g, '/'));
-        setImagePreview(`http://localhost:5000/${formattedPath}`);
+        setImagePreview(`https://online-exam-evgn.vercel.app/${formattedPath}`);
       } else {
         setImagePreview(null);
       }
@@ -75,7 +75,7 @@ const InstructorProfile = ({ user, onUserUpdate }) => {
         }
       };
 
-      const res = await axios.put('http://localhost:5000/api/extra/profile', formData, config);
+      const res = await axios.put('https://online-exam-evgn.vercel.app/api/extra/profile', formData, config);
 
       if (res.data.user) {
         if (typeof onUserUpdate === 'function') {
