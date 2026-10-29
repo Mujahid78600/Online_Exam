@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { filterTableById } from '../../utils/tableSearch';
 
-const API_BASE = 'https://online-exam-evgn.vercel.app';
+const API_BASE = 'http://localhost:5000';
 
 const StudentMyExams = ({ activeTab, setActiveTab }) => {
   const [assignedExams, setAssignedExams] = useState([]);
@@ -376,7 +376,8 @@ const StudentMyExams = ({ activeTab, setActiveTab }) => {
               </div>
             </div>
             <p className="active-question-text">{paperQuestions[currentQIndex].description}</p>
-            
+
+
             {paperQuestions[currentQIndex].type === 'MCQS' && <div className="options-container-box">
               <label className="options-title-label">Select Correct Option:</label>
               {Object.entries(paperQuestions[currentQIndex].options || {}).map(([key, value]) => {
