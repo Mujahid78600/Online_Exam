@@ -380,7 +380,9 @@ const StudentMyExams = ({ activeTab, setActiveTab }) => {
 
             {paperQuestions[currentQIndex].type === 'MCQS' && <div className="options-container-box">
               <label className="options-title-label">Select Correct Option:</label>
-              {Object.entries(paperQuestions[currentQIndex].options || {}).map(([key, value]) => {
+              {Object.entries(paperQuestions[currentQIndex].options || {}).filter(([key, value]) => value != null && String(value).trim() !== '').map(([key, value]) => {
+  
+  
                 const questionId = paperQuestions[currentQIndex]._id;
                 return <label className="mcq-option-label" key={key}><input className="mcq-radio-input" type="radio" name={`mcq_${questionId}`} checked={studentAnswers[questionId] === value} onChange={() => updateAnswer(questionId, value)} />{value}</label>;
               })}
